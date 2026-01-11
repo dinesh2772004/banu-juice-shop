@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banu Juice Shop | பானு ஜூஸ் கடை</title>
+    <meta name="description"
+        content="Fresh and organic juices at Banu Juice Shop. Experience the pure taste of natural fruits in every sip!">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Noto+Sans+Tamil:wght@100..900&family=Poppins:wght@300;400;600;700&family=Quicksand:wght@300;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', 'Noto Sans Tamil', sans-serif;
+            background-color: #fffaf0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .font-fredoka {
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        /* Mesh Gradients */
+        .mesh-orange {
+            background-color: #ff9d00;
+            background-image:
+                radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
+                radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 1) 0, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(339, 49%, 30%, 1) 0, transparent 50%);
+            background:
+                radial-gradient(circle at 0% 0%, rgba(255, 165, 0, 0.15), transparent 40%),
+                radial-gradient(circle at 100% 100%, rgba(255, 255, 0, 0.1), transparent 40%),
+                #fffaf0;
+        }
+
+        .bg-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffa500' fill-opacity='0.03' fill-rule='evenodd'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-15px) rotate(2deg);
+            }
+
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+        }
+
+        .animate-float {
+            animation: float 5s ease-in-out infinite;
+        }
+
+        .blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, rgba(255, 165, 0, 0.1) 0%, rgba(255, 255, 0, 0.1) 100%);
+            filter: blur(80px);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fade-in 0.5s ease-out forwards;
+        }
+    </style>
+</head>
+
+<body class="overflow-x-hidden bg-pattern">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // ==================== TYPES & ENUMS ====================
+        const Page = {
+            HOME: 'home',
+            MENU: 'menu',
+            OWNER: 'owner',
+            CONTACT: 'contact'
+        };
+
+        const Language = {
+            EN: 'en',
+            TA: 'ta'
+        };
+
+        // ==================== CONSTANTS ====================
+        const JUICES = [
+            {
+                id: '1',
+                nameEn: 'Fresh Orange',
+                nameTa: 'ஆரஞ்சு ஜூஸ்',
+                ingredientsEn: 'Pure Orange, Ice, Minimal Sugar',
+                ingredientsTa: 'ஆரஞ்சு, ஐஸ், சர்க்கரை',
+                price: 40,
+                image: 'https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&w=400&q=80',
+                color: 'orange'
+            },
+            {
+                id: '2',
+                nameEn: 'Cool Mint Lime',
+                nameTa: 'புதினா எலுமிச்சை',
+                ingredientsEn: 'Lime, Fresh Mint, Honey',
+                ingredientsTa: 'எலுமிச்சை, புதினா, தேன்',
+                price: 30,
+                image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=400&q=80',
+                color: 'green'
+            },
+            {
+                id: '3',
+                nameEn: 'Sweet Mango Lassi',
+                nameTa: 'மாம்பழ லஸ்ஸி',
+                ingredientsEn: 'Alphanso Mango, Thick Curd',
+                ingredientsTa: 'மாம்பழம், தயிர்',
+                price: 60,
+                image: 'https://images.unsplash.com/photo-1546173159-315724a31696?auto=format&fit=crop&w=400&q=80',
+                color: 'yellow'
+            },
+            {
+                id: '4',
+                nameEn: 'Watermelon Delight',
+                nameTa: 'தர்பூசணி ஜூஸ்',
+                ingredientsEn: 'Fresh Watermelon, Black Salt',
+                ingredientsTa: 'தர்பூசணி, கருப்பு உப்பு',
+                price: 40,
+                image: 'https://thumbs.dreamstime.com/z/vibrant-watermelon-delight-refreshing-juice-slices-perfect-summer-thirst-quencher-experience-ultimate-summer-389076348.jpg',
+                color: 'pink'
+            },
+            {
+                id: '5',
+                nameEn: 'Pomegranate Punch',
+                nameTa: 'மாதுளை ஜூஸ்',
+                ingredientsEn: 'Fresh Pomegranate Arils',
+                ingredientsTa: 'மாதுளை முத்துக்கள்',
+                price: 70,
+                image: 'https://images.unsplash.com/photo-1523472721958-978152f4d69b?auto=format&fit=crop&w=400&q=80',
+                color: 'pink'
+            },
+            {
+                id: '6',
+                nameEn: 'Fruit Mix Juice',
+                nameTa: 'ஃப்ரூட் மிக்ஸர் ஜூஸ்',
+                ingredientsEn: 'Fruit, Rose Milk',
+                ingredientsTa: 'ஃப்ரூட்,ரோஸ் மில்க்',
+                price: 20,
+                image: 'https://www.jeyashriskitchen.com/wp-content/uploads/2023/05/IMG_0594-001.jpg',
+                color: 'pink'
+            },
+            {
+                id: '7',
+                nameEn: 'Rose Milk Juice',
+                nameTa: 'ரோஸ் மில்க் ஜூஸ்',
+                ingredientsEn: 'Milk, Rose Syrup',
+                ingredientsTa: 'பால், ரோஸ் சிரப்',
+                price: 20,
+                image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT65XMuGq4stJQrnjSdOGSiFfSqJMhIw1AZiA&s',
+                color: 'pink'
+            }
+        ];
+
+        const OWNER_INFO = {
+            name: 'Banu',
+            titleEn: 'Founder & Head Chef',
+            titleTa: 'நிறுவனர் மற்றும் தலைமை சமையல்காரர்',
+            bioEn: 'With 15 years of experience in creating healthy blends, Banu started this shop to serve the community fresh and organic juices.',
+            bioTa: '15 ஆண்டுகால அனுபவத்துடன், ஆரோக்கியமான சாறுகளை மக்களுக்கு வழங்க பானு அவர்கள் இந்த கடையைத் தொடங்கினார்.'
+        };
+
+        const CONTACT_INFO = {
+            addressEn: 'Salai, Tamil Nadu, India',
+            addressTa: 'சாலை, தமிழ்நாடு, இந்தியா',
+            phone: '+91 8870449432',
+            whatsapp: '918870449432',
+            email: 'dineshm8870449432@gmail.com',
+            mapIframe: 'https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d15544.7554900792!2d79.56981!3d13.09007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTPCsDA1JzI0LjMiTiA3OcKwMzQnMTEuMyJF!5e0!3m2!1sen!2sin!4v1715694389012!5m2!1sen!2sin'
+        };
+
+        // ==================== JUICE CARD COMPONENT ====================
+        const JuiceCard = ({ item, lang }) => {
+            const colorClasses = {
+                orange: 'bg-orange-50/80 border-orange-200 shadow-orange-100',
+                green: 'bg-green-50/80 border-green-200 shadow-green-100',
+                yellow: 'bg-yellow-50/80 border-yellow-200 shadow-yellow-100',
+                pink: 'bg-pink-50/80 border-pink-200 shadow-pink-100',
+            };
+
+            const badgeClasses = {
+                orange: 'bg-orange-500',
+                green: 'bg-green-500',
+                yellow: 'bg-yellow-500',
+                pink: 'bg-pink-500',
+            };
+
+            const message = encodeURIComponent(
+                lang === Language.EN
+                    ? `Hello! I would like to order 1 ${item.nameEn}.`
+                    : `வணக்கம்! எனக்கு 1 ${item.nameTa} வேண்டும்.`
+            );
+            const whatsappUrl = `https://wa.me/${CONTACT_INFO.whatsapp}?text=${message}`;
+
+            return (
+                <div className={`rounded-[2.5rem] border-2 p-5 transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl backdrop-blur-md flex flex-col h-full ${colorClasses[item.color]}`}>
+                    <div className="relative mb-6 overflow-hidden rounded-[2rem] h-64 sm:h-72 shadow-lg">
+                        <img
+                            src={item.image}
+                            alt={item.nameEn}
+                            className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                        />
+                        <div className={`absolute top-4 right-4 px-6 py-2 rounded-2xl text-white font-black text-2xl shadow-xl ${badgeClasses[item.color]}`}>
+                            ₹{item.price}
+                        </div>
+                    </div>
+
+                    <div className="text-center flex-grow flex flex-col justify-between">
+                        <div>
+                            <h3 className="text-3xl font-black text-gray-800 leading-tight mb-2">
+                                {lang === Language.EN ? item.nameEn : item.nameTa}
+                            </h3>
+
+                            <p className="text-lg text-gray-500 mb-6 font-bold leading-relaxed px-4">
+                                {lang === Language.EN ? item.ingredientsEn : item.ingredientsTa}
+                            </p>
+                        </div>
+
+                        <a
+                            href={whatsappUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`w-full py-5 rounded-2xl text-white font-black text-2xl shadow-lg active:scale-95 transition-all hover:brightness-110 flex items-center justify-center gap-2 ${badgeClasses[item.color]}`}
+                        >
+                            {lang === Language.EN ? 'Order' : 'வாங்கு'} 🛒
+                        </a>
+                    </div>
+                </div>
+            );
+        };
+
+        // ==================== FOOTER NAV COMPONENT ====================
+        const FooterNav = ({ currentPage, setPage, lang }) => {
+            const navItems = [
+                { id: Page.HOME, labelEn: 'Home', labelTa: 'முகப்பு', icon: '🏠' },
+                { id: Page.MENU, labelEn: 'Menu', labelTa: 'மெனு', icon: '🥤' },
+                { id: Page.OWNER, labelEn: 'Owner', labelTa: 'உரிமையாளர்', icon: '👤' },
+                { id: Page.CONTACT, labelEn: 'Contact', labelTa: 'தொடர்பு', icon: '📞' },
+            ];
+
+            return (
+                <nav className="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md border-t border-gray-200 z-50 px-2 py-4 shadow-[0_-4px_12px_-1px_rgba(0,0,0,0.1)]">
+                    <div className="max-w-md mx-auto flex justify-between items-center">
+                        {navItems.map((item) => (
+                            <button
+                                key={item.id}
+                                onClick={() => setPage(item.id)}
+                                className={`flex flex-col items-center justify-center w-1/4 transition-all duration-300 ${currentPage === item.id ? 'scale-110' : 'opacity-60 grayscale'
+                                    }`}
+                            >
+                                <span className="text-3xl mb-1">{item.icon}</span>
+                                <span className={`text-[12px] font-black leading-tight ${currentPage === item.id ? 'text-orange-500' : 'text-gray-600'}`}>
+                                    {lang === Language.EN ? item.labelEn : item.labelTa}
+                                </span>
+                                {currentPage === item.id && (
+                                    <div className="w-1.5 h-1.5 bg-orange-500 rounded-full mt-1 animate-pulse" />
+                                )}
+                            </button>
+                        ))}
+                    </div>
+                </nav>
+            );
+        };
+
+        // ==================== HOME PAGE ====================
+        const Home = ({ setPage, lang }) => {
+            return (
+                <div className="relative pt-10">
+                    {/* Dynamic Blobs for Depth */}
+                    <div className="blob top-[-100px] left-[-100px] animate-pulse"></div>
+                    <div className="blob bottom-[100px] right-[-100px] bg-green-200/20"></div>
+
+                    <div className="pb-24">
+                        {/* Hero Section */}
+                        <section className="relative h-[85vh] flex items-center justify-center text-center px-6 overflow-hidden">
+                            <div className="absolute inset-0 z-0">
+                                <img
+                                    src="https://images.unsplash.com/photo-1621506289937-48e462774870?auto=format&fit=crop&w=1200&q=80"
+                                    alt="Hero Juice"
+                                    className="w-full h-full object-cover opacity-60"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#fffaf0] via-transparent to-transparent"></div>
+                                <div className="absolute inset-0 bg-orange-500/10"></div>
+                            </div>
+
+                            <div className="relative z-10 space-y-8 max-w-4xl">
+                                <div className="inline-block p-8 glass rounded-[3rem] shadow-2xl animate-float border-2 border-orange-200">
+                                    <h1 className="text-5xl md:text-7xl font-black text-orange-600 leading-tight">
+                                        {lang === Language.EN ? 'Banu Juice Shop' : 'பானு ஜூஸ் கடை'}
+                                    </h1>
+                                </div>
+
+                                <div className="glass p-8 rounded-3xl shadow-xl border-2 border-white/50 max-w-2xl mx-auto">
+                                    <p className="text-3xl md:text-4xl font-black text-gray-800 leading-relaxed">
+                                        {lang === Language.EN ? 'Freshness in Every Sip!' : 'ஒவ்வொரு குடிக்கும் புதுமை!'}
+                                    </p>
+                                </div>
+
+                                <div className="flex flex-col sm:flex-row gap-6 justify-center pt-4">
+                                    <button
+                                        onClick={() => setPage(Page.MENU)}
+                                        className="bg-green-500 hover:bg-green-600 text-white font-black py-6 px-12 rounded-[2rem] text-2xl shadow-[0_10px_20px_rgba(34,197,94,0.3)] transform transition hover:scale-105 active:scale-95 flex items-center justify-center gap-3 pointer-events-auto"
+                                    >
+                                        {lang === Language.EN ? 'View Menu' : 'மெனு பாருங்கள்'} <span className="text-3xl">🥤</span>
+                                    </button>
+                                    <button
+                                        onClick={() => setPage(Page.CONTACT)}
+                                        className="bg-orange-500 hover:bg-orange-600 text-white font-black py-6 px-12 rounded-[2rem] text-2xl shadow-[0_10px_20px_rgba(249,115,22,0.3)] transform transition hover:scale-105 active:scale-95 flex items-center justify-center gap-3 pointer-events-auto"
+                                    >
+                                        {lang === Language.EN ? 'Contact Us' : 'எங்களை அழையுங்கள்'} <span className="text-3xl">📞</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Featured Items */}
+                        <section className="relative py-20 px-6">
+                            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-orange-50/50 to-transparent -z-10"></div>
+
+                            <div className="max-w-6xl mx-auto">
+                                <div className="text-center mb-16 relative">
+                                    <h2 className="text-4xl md:text-5xl font-black text-gray-800 relative z-10">
+                                        {lang === Language.EN ? 'Our Best Sellers' : 'எங்கள் சிறந்த தேர்வுகள்'}
+                                    </h2>
+                                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-40 h-40 bg-orange-100 rounded-full blur-3xl -z-10"></div>
+                                </div>
+
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                                    {JUICES.slice(0, 3).map((juice) => (
+                                        <div key={juice.id} className="transform transition duration-500 hover:-translate-y-2">
+                                            <JuiceCard item={juice} lang={lang} />
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <div className="text-center mt-20">
+                                    <button
+                                        onClick={() => setPage(Page.MENU)}
+                                        className="inline-flex items-center gap-4 bg-white border-4 border-orange-500 text-orange-600 font-black py-5 px-10 rounded-[2rem] text-2xl hover:bg-orange-500 hover:text-white transition-all duration-300 shadow-2xl active:scale-95"
+                                    >
+                                        {lang === Language.EN ? 'See All Juices' : 'எல்லா மெனுவும்'} 🍉
+                                    </button>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            );
+        };
+
+        // ==================== MENU PAGE ====================
+        const Menu = ({ lang }) => {
+            const [recommendation, setRecommendation] = React.useState(null);
+            const [loading, setLoading] = React.useState(false);
+
+            const handleRecommend = async (mood) => {
+                setLoading(true);
+                // Simulated AI recommendation (since we don't have API key in static HTML)
+                const recommendations = {
+                    'Tired 😴': lang === Language.EN
+                        ? 'Fresh Orange juice is perfect to boost your energy! / ஆரஞ்சு ஜூஸ் உங்கள் சக்தியை அதிகரிக்கும்!'
+                        : 'ஆரஞ்சு ஜூஸ் உங்கள் சக்தியை அதிகரிக்கும்! / Fresh Orange juice is perfect to boost your energy!',
+                    'Happy 😄': lang === Language.EN
+                        ? 'Mango Lassi will make your happy day even sweeter! / மாம்பழ லஸ்ஸி உங்கள் மகிழ்ச்சியான நாளை இனிமையாக்கும்!'
+                        : 'மாம்பழ லஸ்ஸி உங்கள் மகிழ்ச்சியான நாளை இனிமையாக்கும்! / Mango Lassi will make your happy day even sweeter!',
+                    'Hot Day ☀️': lang === Language.EN
+                        ? 'Watermelon Delight is the ultimate cooling refreshment! / தர்பூசணி ஜூஸ் சிறந்த குளிர்ச்சியான பானம்!'
+                        : 'தர்பூசணி ஜூஸ் சிறந்த குளிர்ச்சியான பானம்! / Watermelon Delight is the ultimate cooling refreshment!',
+                    'Post Workout 💪': lang === Language.EN
+                        ? 'Pomegranate Punch is rich in antioxidants for recovery! / மாதுளை ஜூஸ் உடல் மீட்சிக்கு சிறந்தது!'
+                        : 'மாதுளை ஜூஸ் உடல் மீட்சிக்கு சிறந்தது! / Pomegranate Punch is rich in antioxidants for recovery!'
+                };
+
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                setRecommendation(recommendations[mood] || 'Cool Mint Lime is recommended for a refreshing boost!');
+                setLoading(false);
+            };
+
+            return (
+                <div className="relative min-h-screen pt-10">
+                    <div className="fixed inset-0 bg-gradient-to-tr from-green-50/80 via-white to-yellow-50/80 -z-20"></div>
+                    <div className="fixed top-20 right-[-10%] w-96 h-96 bg-green-200/20 blur-[120px] rounded-full -z-10 animate-pulse"></div>
+                    <div className="fixed bottom-20 left-[-10%] w-96 h-96 bg-orange-200/20 blur-[120px] rounded-full -z-10"></div>
+
+                    <div className="pb-32 pt-16 px-6 max-w-7xl mx-auto relative z-10">
+                        <div className="text-center mb-16">
+                            <h1 className="text-5xl font-black text-gray-800 mb-4 tracking-tight">
+                                {lang === Language.EN ? 'Our Menu' : 'எங்கள் பட்டியல்'}
+                            </h1>
+                            <p className="text-xl text-green-600 font-bold uppercase tracking-widest">
+                                {lang === Language.EN ? 'Pure • Organic • Freshly Pressed' : 'சுத்தமான • இயற்கை • புதிய சாறுகள்'}
+                            </p>
+                            <div className="w-24 h-3 bg-green-400 mx-auto mt-6 rounded-full shadow-sm"></div>
+                        </div>
+
+                        {/* AI Recommender */}
+                        <div className="max-w-4xl mx-auto mb-20">
+                            <div className="bg-gradient-to-br from-orange-400 via-pink-500 to-purple-600 p-1 rounded-[2.5rem] shadow-2xl">
+                                <div className="bg-white/10 backdrop-blur-xl p-8 rounded-[2.4rem] text-white text-center">
+                                    <h3 className="text-3xl font-black mb-2">
+                                        {lang === Language.EN ? 'Banu AI Butler ✨' : 'பானு AI உதவியாளர் ✨'}
+                                    </h3>
+                                    <p className="mb-8 text-orange-100 font-bold text-xl">
+                                        {lang === Language.EN ? 'Need help choosing? Ask us!' : 'எதை குடிப்பது என்று தெரியவில்லையா? எங்களிடம் கேளுங்கள்!'}
+                                    </p>
+
+                                    <div className="flex flex-wrap justify-center gap-4">
+                                        {[
+                                            { en: 'Tired 😴', ta: 'சோர்வாக 😴' },
+                                            { en: 'Happy 😄', ta: 'மகிழ்ச்சியாக 😄' },
+                                            { en: 'Hot Day ☀️', ta: 'வெயில் ☀️' },
+                                            { en: 'Post Workout 💪', ta: 'உடற்பயிற்சிக்கு பிறகு 💪' }
+                                        ].map((mood) => (
+                                            <button
+                                                key={mood.en}
+                                                disabled={loading}
+                                                onClick={() => handleRecommend(mood.en)}
+                                                className="bg-white/20 hover:bg-white text-white hover:text-orange-600 font-black py-4 px-8 rounded-2xl border-2 border-white/40 transition-all duration-300 active:scale-95 disabled:opacity-50 text-xl shadow-lg"
+                                            >
+                                                {lang === Language.EN ? mood.en : mood.ta}
+                                            </button>
+                                        ))}
+                                    </div>
+
+                                    {loading && (
+                                        <div className="text-center mt-10">
+                                            <div className="inline-block w-8 h-8 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
+                                            <p className="mt-4 font-bold animate-pulse tracking-widest">
+                                                {lang === Language.EN ? 'THINKING...' : 'யோசிக்கிறோம்...'}
+                                            </p>
+                                        </div>
+                                    )}
+
+                                    {recommendation && !loading && (
+                                        <div className="mt-10 p-8 bg-white/20 backdrop-blur-2xl rounded-[2rem] border-2 border-white/30 animate-fade-in shadow-inner">
+                                            <p className="text-xl md:text-2xl font-bold leading-relaxed italic">
+                                                "{recommendation}"
+                                            </p>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+                            {JUICES.map((juice) => (
+                                <JuiceCard key={juice.id} item={juice} lang={lang} />
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // ==================== OWNER PAGE ====================
+        const Owner = ({ lang }) => {
+            const playGreeting = () => {
+                // Simple greeting using browser speech synthesis
+                const utterance = new SpeechSynthesisUtterance(
+                    lang === Language.EN
+                        ? 'Welcome to Banu Juice Shop!'
+                        : 'பானு ஜூஸ் கடைக்கு உங்களை அன்புடன் வரவேற்கிறோம்!'
+                );
+                utterance.lang = lang === Language.EN ? 'en-US' : 'ta-IN';
+                speechSynthesis.speak(utterance);
+            };
+
+            return (
+                <div className="relative min-h-screen pt-10">
+                    <div className="fixed inset-0 bg-gradient-to-br from-orange-50 via-white to-pink-50 -z-20"></div>
+
+                    <div className="pb-32 pt-16 px-6 max-w-5xl mx-auto relative z-10">
+                        <div className="text-center mb-16">
+                            <h1 className="text-5xl font-black text-gray-800 mb-4">
+                                {lang === Language.EN ? 'The Story' : 'எங்கள் கதை'}
+                            </h1>
+                            <div className="w-24 h-3 bg-pink-400 mx-auto mt-6 rounded-full shadow-sm"></div>
+                        </div>
+
+                        <div className="relative">
+                            <div className="absolute -top-20 -left-20 w-64 h-64 bg-yellow-200/30 rounded-full blur-3xl -z-10"></div>
+                            <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-pink-200/30 rounded-full blur-3xl -z-10"></div>
+
+                            <div className="bg-white/70 backdrop-blur-xl rounded-[4rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] overflow-hidden border-2 border-white/50">
+                                <div className="flex flex-col md:flex-row items-center">
+                                    <div className="md:w-1/2 p-6">
+                                        <div className="relative rounded-[3.5rem] overflow-hidden aspect-[4/5] md:aspect-square border-[12px] border-white shadow-2xl group">
+                                            <img
+                                                src="https://th.bing.com/th/id/OIP.T0s-LrEK_nZCBIf0Ugr19wHaEo?w=297&h=185&c=7&r=0&o=7&pid=1.7&rm=3"
+                                                alt="Owner Banu"
+                                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                            />
+                                            <div className="absolute bottom-8 right-8 scale-100 transition-transform duration-300 group-hover:scale-110">
+                                                <button
+                                                    onClick={playGreeting}
+                                                    className="bg-orange-500 hover:bg-orange-600 text-white p-6 rounded-full shadow-[0_15px_30px_rgba(249,115,22,0.4)] transition-all flex items-center justify-center animate-pulse"
+                                                >
+                                                    <span className="text-4xl">🔊</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="md:w-1/2 p-12 lg:p-16 space-y-8">
+                                        <div>
+                                            <h2 className="text-4xl font-black text-gray-800 mb-2">{OWNER_INFO.name}</h2>
+                                            <p className="text-2xl font-black text-pink-500 uppercase tracking-widest">
+                                                {lang === Language.EN ? OWNER_INFO.titleEn : OWNER_INFO.titleTa}
+                                            </p>
+                                        </div>
+
+                                        <div className="space-y-6">
+                                            <p className="text-3xl leading-relaxed text-gray-700 font-bold border-l-8 border-pink-400 pl-6">
+                                                "{lang === Language.EN ? OWNER_INFO.bioEn : OWNER_INFO.bioTa}"
+                                            </p>
+                                        </div>
+
+                                        <div className="pt-8 grid grid-cols-3 gap-4">
+                                            <div className="bg-green-100/50 p-6 rounded-3xl text-center border border-green-200">
+                                                <p className="text-4xl mb-2">🥗</p>
+                                                <p className="text-xs font-black text-green-700 uppercase tracking-tighter">
+                                                    {lang === Language.EN ? 'Organic' : 'இயற்கை'}
+                                                </p>
+                                            </div>
+                                            <div className="bg-orange-100/50 p-6 rounded-3xl text-center border border-orange-200">
+                                                <p className="text-4xl mb-2">❤️</p>
+                                                <p className="text-xs font-black text-orange-700 uppercase tracking-tighter">
+                                                    {lang === Language.EN ? 'Love' : 'அன்பு'}
+                                                </p>
+                                            </div>
+                                            <div className="bg-blue-100/50 p-6 rounded-3xl text-center border border-blue-200">
+                                                <p className="text-4xl mb-2">🌟</p>
+                                                <p className="text-xs font-black text-blue-700 uppercase tracking-tighter">
+                                                    {lang === Language.EN ? 'Pure' : 'சுத்தம்'}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="mt-20 bg-gradient-to-r from-orange-400 to-yellow-500 p-12 rounded-[3rem] text-white text-center shadow-2xl relative overflow-hidden group">
+                            <h3 className="text-4xl font-black mb-4 relative z-10 uppercase italic">
+                                {lang === Language.EN ? '"Drink Fresh, Stay Fresh!"' : '"புத்துணர்ச்சியுடன் இருங்கள்!"'}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // ==================== CONTACT PAGE ====================
+        const Contact = ({ lang }) => {
+            return (
+                <div className="relative min-h-screen pt-10">
+                    <div className="fixed inset-0 bg-gradient-to-br from-green-100 via-yellow-50 to-orange-100 -z-20"></div>
+                    <div className="fixed top-0 left-0 w-full h-96 bg-gradient-to-b from-orange-200/30 to-transparent -z-10"></div>
+
+                    <div className="pb-32 pt-16 px-6 max-w-7xl mx-auto relative z-10">
+                        <div className="text-center mb-16">
+                            <h1 className="text-5xl font-black text-gray-800 mb-4">
+                                {lang === Language.EN ? 'Find Us' : 'எங்களை அடைய'}
+                            </h1>
+                            <div className="w-24 h-3 bg-orange-400 mx-auto mt-6 rounded-full shadow-sm"></div>
+                        </div>
+
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                            <div className="space-y-10">
+                                {/* Address Card */}
+                                <div className="bg-white/80 backdrop-blur-xl p-10 rounded-[3rem] shadow-2xl border-2 border-white flex items-start gap-6 transform transition hover:scale-[1.02]">
+                                    <div className="bg-orange-500 text-white p-6 rounded-[2rem] text-4xl shadow-lg">📍</div>
+                                    <div>
+                                        <h3 className="text-2xl font-black text-gray-800 mb-3 uppercase tracking-tight">
+                                            {lang === Language.EN ? 'Address' : 'முகவரி'}
+                                        </h3>
+                                        <p className="text-2xl text-orange-600 font-black mb-2">
+                                            {lang === Language.EN ? CONTACT_INFO.addressEn : CONTACT_INFO.addressTa}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* Email Card */}
+                                <div className="bg-white/80 backdrop-blur-xl p-10 rounded-[3rem] shadow-2xl border-2 border-white flex items-start gap-6 transform transition hover:scale-[1.02]">
+                                    <div className="bg-blue-500 text-white p-6 rounded-[2rem] text-4xl shadow-lg">📧</div>
+                                    <div>
+                                        <h3 className="text-2xl font-black text-gray-800 mb-3 uppercase tracking-tight">
+                                            {lang === Language.EN ? 'Email' : 'மின்னஞ்சல்'}
+                                        </h3>
+                                        <p className="text-xl text-blue-600 font-black mb-2 break-all">
+                                            {CONTACT_INFO.email}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* Action Buttons */}
+                                <div className="grid grid-cols-2 gap-6">
+                                    <a
+                                        href={`tel:${CONTACT_INFO.phone}`}
+                                        className="group bg-white/90 backdrop-blur-md p-10 rounded-[3rem] shadow-xl transition-all duration-300 hover:bg-green-500 hover:text-white flex flex-col items-center justify-center text-center gap-4 border-2 border-white"
+                                    >
+                                        <span className="text-5xl group-hover:scale-125 transition-transform duration-300">📞</span>
+                                        <span className="text-2xl font-black leading-tight uppercase">
+                                            {lang === Language.EN ? 'Call Now' : 'அழையுங்கள்'}
+                                        </span>
+                                    </a>
+                                    <a
+                                        href={`https://wa.me/${CONTACT_INFO.whatsapp}`}
+                                        className="group bg-white/90 backdrop-blur-md p-10 rounded-[3rem] shadow-xl transition-all duration-300 hover:bg-[#25D366] hover:text-white flex flex-col items-center justify-center text-center gap-4 border-2 border-white"
+                                    >
+                                        <span className="text-5xl group-hover:scale-125 transition-transform duration-300">💬</span>
+                                        <span className="text-2xl font-black leading-tight uppercase">
+                                            WhatsApp
+                                        </span>
+                                    </a>
+                                </div>
+
+                                {/* Form */}
+                                <form className="bg-white/60 backdrop-blur-2xl p-10 rounded-[3rem] shadow-2xl border-2 border-white/50 space-y-6">
+                                    <h3 className="text-3xl font-black text-gray-800 mb-6 text-center">
+                                        {lang === Language.EN ? 'Send a Message' : 'செய்தி அனுப்பவும்'}
+                                    </h3>
+                                    <div className="space-y-4">
+                                        <input
+                                            type="text"
+                                            placeholder={lang === Language.EN ? 'Your Name' : 'பெயர்'}
+                                            className="w-full p-6 rounded-2xl bg-white/50 border-2 border-transparent focus:border-orange-500 focus:bg-white outline-none font-bold text-xl transition-all"
+                                        />
+                                        <input
+                                            type="tel"
+                                            placeholder={lang === Language.EN ? 'Phone Number' : 'தொலைபேசி எண்'}
+                                            className="w-full p-6 rounded-2xl bg-white/50 border-2 border-transparent focus:border-orange-500 focus:bg-white outline-none font-bold text-xl transition-all"
+                                        />
+                                        <textarea
+                                            rows={4}
+                                            placeholder={lang === Language.EN ? 'Your Message' : 'செய்தி'}
+                                            className="w-full p-6 rounded-2xl bg-white/50 border-2 border-transparent focus:border-orange-500 focus:bg-white outline-none font-bold text-xl transition-all"
+                                        ></textarea>
+                                    </div>
+                                    <button type="button" className="w-full bg-orange-500 hover:bg-orange-600 text-white font-black py-6 rounded-2xl text-2xl transition-all shadow-lg active:scale-95">
+                                        {lang === Language.EN ? 'Submit' : 'அனுப்பவும்'}
+                                    </button>
+                                </form>
+                            </div>
+
+                            {/* Map */}
+                            <div className="relative group">
+                                <div className="h-full min-h-[600px] bg-white rounded-[4rem] overflow-hidden shadow-2xl border-[12px] border-white relative z-10">
+                                    <iframe
+                                        src={CONTACT_INFO.mapIframe}
+                                        className="w-full h-full border-0 grayscale hover:grayscale-0 transition-all duration-700"
+                                        allowFullScreen={true}
+                                        loading="lazy"
+                                    ></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // ==================== MAIN APP COMPONENT ====================
+        const App = () => {
+            const [currentPage, setCurrentPage] = React.useState(Page.HOME);
+            const [lang, setLang] = React.useState(Language.TA); // Default to Tamil
+
+            // Scroll to top on page change
+            React.useEffect(() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, [currentPage]);
+
+            const renderPage = () => {
+                switch (currentPage) {
+                    case Page.HOME:
+                        return <Home setPage={setCurrentPage} lang={lang} />;
+                    case Page.MENU:
+                        return <Menu lang={lang} />;
+                    case Page.OWNER:
+                        return <Owner lang={lang} />;
+                    case Page.CONTACT:
+                        return <Contact lang={lang} />;
+                    default:
+                        return <Home setPage={setCurrentPage} lang={lang} />;
+                }
+            };
+
+            return (
+                <div className="min-h-screen flex flex-col bg-[#fdfdfd] selection:bg-orange-200">
+                    {/* Top Header with Language Toggle */}
+                    <header className="fixed top-0 left-0 right-0 z-50 p-4 pointer-events-none">
+                        <div className="max-w-7xl mx-auto flex justify-end">
+                            <div className="pointer-events-auto bg-white/80 backdrop-blur-md p-1 rounded-2xl shadow-xl border-2 border-orange-100 flex gap-1">
+                                <button
+                                    onClick={() => setLang(Language.EN)}
+                                    className={`px-6 py-2 rounded-xl font-bold transition-all ${lang === Language.EN ? 'bg-orange-500 text-white' : 'text-gray-500 hover:bg-orange-50'
+                                        }`}
+                                >
+                                    English
+                                </button>
+                                <button
+                                    onClick={() => setLang(Language.TA)}
+                                    className={`px-6 py-2 rounded-xl font-bold transition-all ${lang === Language.TA ? 'bg-orange-500 text-white' : 'text-gray-500 hover:bg-orange-50'
+                                        }`}
+                                >
+                                    தமிழ்
+                                </button>
+                            </div>
+                        </div>
+                    </header>
+
+                    {/* Dynamic Content */}
+                    <main className="flex-grow pt-10">
+                        {renderPage()}
+                    </main>
+
+                    {/* Persistent Footer Nav */}
+                    <FooterNav currentPage={currentPage} setPage={setCurrentPage} lang={lang} />
+
+                    {/* Decorative Footer */}
+                    <footer className="bg-gray-100 pt-10 pb-32 px-6 text-center">
+                        <div className="max-w-xl mx-auto">
+                            <div className="text-3xl mb-4">🍹🥤🍉</div>
+                            <h2 className="text-2xl font-black text-gray-800">
+                                {lang === Language.EN ? 'Banu Juice Shop' : 'பானு ஜூஸ் கடை'}
+                            </h2>
+                            <p className="text-gray-500 font-bold mb-6">
+                                {lang === Language.EN ? 'Freshness you can taste!' : 'உண்மையான புத்துணர்ச்சி!'}
+                            </p>
+
+                            <div className="flex justify-center gap-6 mb-8">
+                                <a href="#" className="text-3xl hover:scale-120 transition">📸</a>
+                                <a href="#" className="text-3xl hover:scale-120 transition">📘</a>
+                                <a href="#" className="text-3xl hover:scale-120 transition">💬</a>
+                            </div>
+
+                            <p className="text-xs text-gray-400 font-bold tracking-widest uppercase">
+                                © 2026 Banu Juice Shop. All Rights Reserved.
+                            </p>
+                        </div>
+                    </footer>
+                </div>
+            );
+        };
+
+        // ==================== RENDER THE APP ====================
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+
+</html>
